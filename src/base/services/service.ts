@@ -1,4 +1,3 @@
-import { Request, Response } from 'express';
 import { Model, Document, UpdateQuery } from 'mongoose';
 
 export class CRUDService<T extends Document> {

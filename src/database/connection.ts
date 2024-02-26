@@ -1,7 +1,5 @@
 const mongoose = require('mongoose');
-// const uri = "mongodb+srv://Celtuc:lq69dA3cTTnDW9ye@cluster0.8uqk5pr.mongodb.net/";
 const uri = "mongodb+srv://CelTuc:I0Dq7IRe01MhUTuA@celtuc.nivph2x.mongodb.net/?retryWrites=true&w=majority&appName=CelTuc";
-// I0Dq7IRe01MhUTuA
 
 
 /**
