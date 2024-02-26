@@ -1,0 +1,8 @@
+{
+    "exportall.config.folderListener": [
+        "/src/database/schemas"
+    ],
+    "exportall.config.relExclusion": [
+        "/src/database/schemas"
+    ]
+}
