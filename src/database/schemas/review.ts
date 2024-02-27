@@ -1,4 +1,4 @@
-import mongoose, { Schema } from "mongoose";
+import mongoose, { Document, Schema } from 'mongoose';
 import { Review } from "../../typings/interfaces";
 
 interface ReviewModel extends Review, Document { }

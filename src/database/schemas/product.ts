@@ -1,5 +1,4 @@
-import mongoose, { Schema } from "mongoose";
-import { Product } from "../../typings/interfaces";
+import mongoose, { Document, Schema } from 'mongoose';
 
 interface ProductModel extends Document { }
 

@@ -1,5 +1,4 @@
-import mongoose, { Schema } from "mongoose";
-import { MainCarouselItem } from "../../typings/interfaces";
+import mongoose, { Document, Schema } from 'mongoose';
 
 interface MainCarouselItemModel extends Document { }
 

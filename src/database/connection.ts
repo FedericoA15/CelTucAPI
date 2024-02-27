@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const uri = "mongodb+srv://CelTuc:I0Dq7IRe01MhUTuA@celtuc.nivph2x.mongodb.net/?retryWrites=true&w=majority&appName=CelTuc";
+const uri = process.env.MONGOURI;
 
 
 /**
