@@ -7,7 +7,7 @@ const app = express()
 
 app.use(express.json())
 
-const PORT: number = 3004 || process.env.PORT
+const PORT = process.env.PORT
 
 
 app.get("/status", (_, res) => {

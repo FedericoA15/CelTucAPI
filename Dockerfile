@@ -1,17 +1,19 @@
-FROM node:18
+FROM node:18 AS dependencies
 
-# Establece el directorio de trabajo dentro del contenedor
-WORKDIR /app
+WORKDIR /build
 
 COPY package*.json ./
 
 RUN npm install
 
-RUN npm run tsc
+FROM node:18 AS build
 
+WORKDIR /build
+
+COPY --from=dependencies /build/node_modules ./node_modules
 COPY . .
 
-ENV MONGOURI=$MONGOURI
+RUN npm run tsc
 
 EXPOSE 3000
 
