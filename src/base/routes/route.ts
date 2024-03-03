@@ -1,4 +1,4 @@
-import express, { Request, Response } from 'express';
+import express from 'express';
 import { Model, Document } from 'mongoose';
 import { CRUDController } from '../controllers/controller';
 import { CRUDService } from '../services/service';

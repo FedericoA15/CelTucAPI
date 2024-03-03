@@ -1,13 +1,13 @@
 require('dotenv').config();
 import express from "express"
 import { run } from "./database/connection"
-import router from "./routes"
+import router from "./routes/_index"
 
 const app = express()
 
 app.use(express.json())
 
-const PORT: number = 3000 || process.env.PORT
+const PORT: number = 3004 || process.env.PORT
 
 
 app.get("/status", (_, res) => {
