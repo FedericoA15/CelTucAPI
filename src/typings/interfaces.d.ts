@@ -1,4 +1,4 @@
-import IBase from "../base/model";
+import IBase from "../base/model/model";
 
 interface User extends IBase {
   email: string;

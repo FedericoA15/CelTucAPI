@@ -7,13 +7,14 @@ export class CRUDService<T extends Document> {
         this.model = model;
     }
 
-    getAll = async () => {
-        return await this.model.find();
+    getAll = async (filter = {}) => {
+        return await this.model.find(filter);
     };
-
-    getById = async (id: string) => {
-        return await this.model.findById(id);
+    
+    getById = async (filter = {}) => {
+        return await this.model.findOne(filter);
     };
+    
 
     create = async (body: T) => {
         const newDocument = new this.model(body);
@@ -26,6 +27,7 @@ export class CRUDService<T extends Document> {
     };
 
     delete = async (id: string) => {
-        return await this.model.findByIdAndDelete(id);
+        return await this.model.findByIdAndUpdate(id, { deleted: true }, { new: true });
     };
+    
 }

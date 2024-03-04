@@ -11,16 +11,28 @@ export class CRUDController<T extends Document> {
 
     getBase = async (req: Request, res: Response) => {
         try {
-            const documents = await this.service.getAll();;
+            let filter = { ...req.query, deleted: false };
+    
+            if (req.query.deleted === 'true') {
+                filter.deleted = true;
+            }
+    
+            const documents = await this.service.getAll(filter);
             res.status(200).json(documents);
         } catch (err) {
             res.status(500).json({ message: 'Error retrieving documents' });
         }
     };
-
+    
     getIdBase = async (req: Request, res: Response) => {
         try {
-            const document = await this.service.getById(req.params.id);
+            let filter: any = { ...req.query, _id: req.params.id, deleted: false };
+    
+            if (req.query.deleted === 'true') {
+                filter.deleted = true;
+            }
+    
+            const document = await this.service.getById(filter);
             if (document) {
                 res.status(200).json(document);
             } else {
@@ -30,7 +42,7 @@ export class CRUDController<T extends Document> {
             res.status(500).json({ message: 'Error retrieving document' });
         }
     };
-
+    
     postBase = async (req: Request, res: Response) => {
         try {
             const newDocument = await this.service.create(req.body);
@@ -55,14 +67,14 @@ export class CRUDController<T extends Document> {
 
     deleteBase = async (req: Request, res: Response) => {
         try {
-            const document = await this.service.delete(req.params.id);
-            if (document) {
-                res.status(200).json({ message: 'Document deleted' });
+            const updatedDocument = await this.service.update(req.params.id, { deleted: true });
+            if (updatedDocument) {
+                res.status(200).json({ message: 'Document marked as deleted', document: updatedDocument });
             } else {
                 res.status(404).json({ message: 'Document not found' });
             }
         } catch (err) {
-            res.status(500).json({ message: 'Error deleting document' });
+            res.status(500).json({ message: 'Error marking document as deleted' });
         }
     };
 }

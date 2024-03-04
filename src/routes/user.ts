@@ -1,6 +1,8 @@
-import express from 'express';
+import express from "express";
+import { postUser } from "../controllers/user";
 
-const router = express.Router();
+const routerUser = express.Router();
 
+routerUser.post("", postUser);
 
-export default router;
+export default routerUser;

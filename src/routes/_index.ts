@@ -19,10 +19,12 @@ import {
   UserModel,
   TicketModel,
 } from "../database/schemas/_index";
+import routerLogin from "./login";
+import routerUser from "./user";
 
 const router = Router();
 
-router.use("/address", createCRUDRoutes(AddressModel));
+router.use("/address",createCRUDRoutes(AddressModel));
 router.use("/blog", createCRUDRoutes(BlogModel));
 router.use("/brand", createCRUDRoutes(BrandModel));
 router.use("/category", createCRUDRoutes(CategoryModel));
@@ -37,7 +39,9 @@ router.use("/product", createCRUDRoutes(ProductModel));
 router.use("/review", createCRUDRoutes(ReviewModel));
 router.use("/service", createCRUDRoutes(ServiceModel));
 router.use("/shop", createCRUDRoutes(ShopModel));
-router.use("/user", createCRUDRoutes(UserModel));
+router.use("/user", routerUser,createCRUDRoutes(UserModel));
 router.use("/ticket", createCRUDRoutes(TicketModel));
+
+router.unsubscribe("/login", routerLogin)
 
 export default router;
