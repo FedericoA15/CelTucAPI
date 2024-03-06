@@ -3,6 +3,7 @@ import express from "express"
 import router from "./routes/_index"
 import { run } from "./database/connection"
 import  cors from "cors"
+import { uploadImage } from "./middlewares/multer/multer";
 
 
 const app = express()
@@ -21,6 +22,13 @@ app.get("/status", (_req, res) => {
 
 app.use("/api", router)
 
+
+
+app.post('/subir-archivo', uploadImage, (req, res) => {
+  // Aquí puedes acceder a la URL del archivo subido a Cloudinary
+  res.json({ imageUrl: req.file?.path });
+
+});
 
 /**
  * Starts the server and listens for incoming requests.
