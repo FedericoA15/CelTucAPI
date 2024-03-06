@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { hashPassword } from "../utils/password";
-import UserModel from "../database/schemas/user";
+import { postUser } from "../services/user";
 
 
 /**
@@ -8,11 +8,10 @@ import UserModel from "../database/schemas/user";
  * @param req - The request object
  * @param res - The response object
  */
-const postUser = async (req: Request, res: Response) => {
+const createUser = async (req: Request, res: Response) => {
   try {
-    const hashedPassword = await hashPassword(req.body.password); 
-    const newUser = new UserModel({...req.body, password: hashedPassword }); 
-    await newUser.save();
+    const hashedPassword: string = await hashPassword(req.body.password);
+    const newUser = postUser(req.body, hashedPassword)
     res.status(200).json({
       newUser,
     });
@@ -21,6 +20,6 @@ const postUser = async (req: Request, res: Response) => {
   }
 };
 
-export { postUser };
+export { createUser };
 
 

@@ -21,6 +21,7 @@ import {
 } from "../database/schemas/_index";
 import routerLogin from "./login";
 import routerUser from "./user";
+import routerLogout from "./logout";
 
 const router = Router();
 
@@ -42,6 +43,7 @@ router.use("/shop", createCRUDRoutes(ShopModel));
 router.use("/user", routerUser,createCRUDRoutes(UserModel));
 router.use("/ticket", createCRUDRoutes(TicketModel));
 
-router.unsubscribe("/login", routerLogin)
+router.use("/login", routerLogin)
+router.use("/logout", routerLogout)
 
 export default router;

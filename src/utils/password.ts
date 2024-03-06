@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt';
 
-const secretKey = process.env.SECRET_KEY;
+const secretKey: any = process.env.SECRET_KEY;
 
 const passwordCache: { [key: string]: string } = {};
 

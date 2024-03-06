@@ -1,20 +1,20 @@
-import { Request, Response } from "express";
-import { getUser } from "../services/user";
-import { sign } from "jsonwebtoken";
-import { comparePassword } from "../utils/password";
+import jwt from 'jsonwebtoken';
+import { comparePassword } from '../utils/password';
+import { getUser } from '../services/user';
+import { Request, Response } from 'express';
 
-let secretKey: any = process.env.SECRET_KEY;
+const secretKey: any = process.env.SECRET_KEY;
 
 /**
  * Login user
- * @param req - request object
- * @param res - response object
+ * @param req - objeto de solicitud
+ * @param res - objeto de respuesta
  */
 const login = async (req: Request, res: Response) => {
   try {
     const user = await getUser({ email: req.body.email });
     if (!user) {
-      return res.status(400).json({ message: "Invalid email or password" });
+      return res.status(400).json({ message: "Email or password invalid" });
     }
 
     const isValidPassword = await comparePassword(
@@ -23,11 +23,13 @@ const login = async (req: Request, res: Response) => {
     );
 
     if (!isValidPassword) {
-      return res.status(400).json({ message: "Invalid email or password" });
+      return res.status(400).json({ message: "Email or password invalid" });
     }
 
     const payload = { id: user._id };
-    const token = sign(payload, secretKey, { expiresIn: "1h" });
+    const token = jwt.sign(payload, secretKey, { expiresIn: '1h' });
+
+    res.cookie('authToken', token, { httpOnly: true, secure: true });
 
     res.status(200).json({
       message: "Login successful",
