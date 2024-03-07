@@ -5,7 +5,7 @@ import { cloudinary } from '../../config/cloudinary';
 const upload = multer({ dest: 'uploads/' });
 
 export const uploadImage = (req: Request, res: Response, next: NextFunction) => {
-  upload.single('image')(req, res, async function (err) {
+  upload.single('field')(req, res, async function (err) {
     if (err instanceof Error) {
       return res.status(500).json({ error: err.message });
     }
@@ -27,7 +27,7 @@ export const uploadImage = (req: Request, res: Response, next: NextFunction) => 
 };
 
 export const uploadMultipleImages = (req: Request, res: Response, next: NextFunction) => {
-  upload.array('images', 10)(req, res, async function (err) {
+  upload.array('fields', 10)(req, res, async function (err) {
     if (err instanceof Error) {
       return res.status(500).json({ error: err.message });
     }

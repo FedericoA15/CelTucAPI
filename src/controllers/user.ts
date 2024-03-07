@@ -10,6 +10,7 @@ import { postUser } from "../services/user";
  */
 const createUser = async (req: Request, res: Response) => {
   try {
+    console.log(req.body)
     const hashedPassword: string = await hashPassword(req.body.password);
     const newUser = postUser(req.body, hashedPassword)
     res.status(200).json({

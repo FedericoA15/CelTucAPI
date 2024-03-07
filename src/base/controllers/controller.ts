@@ -1,12 +1,15 @@
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import { Document } from 'mongoose';
 import { CRUDService } from '../services/service';
+import { uploadImage } from '../../middlewares/multer/multer';
 
 export class CRUDController<T extends Document> {
     service: CRUDService<T>;
+    imageProp?: string;
 
-    constructor(service: CRUDService<T>) {
+    constructor(service: CRUDService<T>, imageProp?: string) {
         this.service = service;
+        this.imageProp = imageProp;
     }
 
     getBase = async (req: Request, res: Response) => {
@@ -75,6 +78,19 @@ export class CRUDController<T extends Document> {
             }
         } catch (err) {
             res.status(500).json({ message: 'Error marking document as deleted' });
+        }
+    };
+
+    uploadImageOptional = (req: Request, res: Response, next: NextFunction) => {
+        if (req.file) {
+            uploadImage(req, res, (err) => {
+                if (err) {
+                    return res.status(500).json({ error: err.message });
+                }
+                next();
+            });
+        } else {
+            next();
         }
     };
 }

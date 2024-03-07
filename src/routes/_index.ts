@@ -40,7 +40,7 @@ router.use("/product", createCRUDRoutes(ProductModel));
 router.use("/review", createCRUDRoutes(ReviewModel));
 router.use("/service", createCRUDRoutes(ServiceModel));
 router.use("/shop", createCRUDRoutes(ShopModel));
-router.use("/user", routerUser,createCRUDRoutes(UserModel));
+router.use("/user", routerUser,createCRUDRoutes(UserModel, "avatar"));
 router.use("/ticket", createCRUDRoutes(TicketModel));
 
 router.use("/login", routerLogin)

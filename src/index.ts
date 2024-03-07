@@ -24,11 +24,11 @@ app.use("/api", router)
 
 
 
-app.post('/subir-archivo', uploadImage, (req, res) => {
-  // Aquí puedes acceder a la URL del archivo subido a Cloudinary
-  res.json({ imageUrl: req.file?.path });
+// app.post('/subir-archivo', uploadImage, (req, res) => {
+//   // Aquí puedes acceder a la URL del archivo subido a Cloudinary
+//   res.json({ imageUrl: req.file?.path });
 
-});
+// });
 
 /**
  * Starts the server and listens for incoming requests.
