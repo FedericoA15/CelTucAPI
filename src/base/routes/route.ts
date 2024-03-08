@@ -2,6 +2,7 @@ import express from 'express';
 import { Model, Document } from 'mongoose';
 import { CRUDController } from '../controllers/controller';
 import { CRUDService } from '../services/service';
+import { uploadImage, uploadMultipleImages } from '../../middlewares/multer/multer';
 
 export function createCRUDRoutes<T extends Document>(model: Model<T>, imageProp?: string) {
     const router = express.Router();
@@ -15,17 +16,17 @@ export function createCRUDRoutes<T extends Document>(model: Model<T>, imageProp?
     router.get('/:id', controller.getIdBase);
 
     // POST
-    router.post('/', controller.uploadImageOptional, controller.postBase);
+    router.post('/', uploadImage, controller.postBase);
 
     // PUT
-    router.put('/:id', controller.uploadImageOptional, controller.putBase);
+    router.put('/:id', controller.putBase);
 
     // DELETE
     router.delete('/:id', controller.deleteBase);
 
-    if (imageProp) {
-        router.put(`/:id/${imageProp}`, controller.uploadImageOptional, controller.putBase);
-    }
+    // if (imageProp) {
+    //     router.put(`/:id/${imageProp}`, controller.uploadImageOptional, controller.putBase);
+    // }
 
     return router;
 }

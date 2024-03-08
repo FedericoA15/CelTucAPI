@@ -48,10 +48,15 @@ export class CRUDController<T extends Document> {
     
     postBase = async (req: Request, res: Response) => {
         try {
-            const newDocument = await this.service.create(req.body);
-            res.status(201).json(newDocument);
+            const body = req.body;
+            console.log(body);
+            if (this.imageProp && req.body.imageURL) {
+                body[this.imageProp] = req.body.imageURL;
+            }
+            const document = await this.service.create(body);
+            res.status(201).json(document);
         } catch (err) {
-            res.status(500).json({ message: 'Error creating document' });
+            res.status(500).json({ error: "err.message" });
         }
     };
 
@@ -79,16 +84,5 @@ export class CRUDController<T extends Document> {
         } catch (err) {
             res.status(500).json({ message: 'Error marking document as deleted' });
         }
-    };
-
-    uploadImageOptional = (req: Request, res: Response, next: NextFunction) => {
-            console.log(req.body);
-            uploadImage(req, res, (err) => {
-                if (err) {
-                    return res.status(500).json({ error: err.message });
-                }
-                next();
-            });
-        
     };
 }
