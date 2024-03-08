@@ -82,15 +82,13 @@ export class CRUDController<T extends Document> {
     };
 
     uploadImageOptional = (req: Request, res: Response, next: NextFunction) => {
-        if (req.file) {
+            console.log(req.body);
             uploadImage(req, res, (err) => {
                 if (err) {
                     return res.status(500).json({ error: err.message });
                 }
                 next();
             });
-        } else {
-            next();
-        }
+        
     };
 }
