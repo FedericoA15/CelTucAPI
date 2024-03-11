@@ -15,7 +15,6 @@ export class CRUDService<T extends Document> {
         return await this.model.findOne(filter);
     };
     
-
     create = async (body: T) => {
         const newDocument = new this.model(body);
         await newDocument.save();

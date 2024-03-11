@@ -47,7 +47,7 @@ export class CRUDController<T extends Document> {
 
   postBase = async (req: Request, res: Response) => {
     try {
-      const body = req.body;
+      const body = {...req.body, deleted: false};
       if (this.imageProp && (req as any)[this.imageProp]) {
         body[this.imageProp] = (req as any)[this.imageProp];
       }
