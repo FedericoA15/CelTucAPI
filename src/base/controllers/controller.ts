@@ -93,4 +93,24 @@ export class CRUDController<T extends Document> {
       res.status(500).json({ message: "Error marking document as deleted" });
     }
   };
+
+  putBaseForImg = async (req: Request, res: Response) => {
+    try {
+      const body = req.body;
+      if (this.imageProp && (req as any)[this.imageProp]) {
+        body[this.imageProp] = (req as any)[this.imageProp];
+      }
+      const updatedDocument = await this.service.update(
+        req.params.id,
+        req.body
+      );
+      if (updatedDocument) {
+        res.status(200).json(updatedDocument);
+      } else {
+        res.status(404).json({ message: "Document not found" });
+      }
+    } catch (err) {
+      res.status(500).json({ message: "Error updating document" });
+    }
+  };
 }

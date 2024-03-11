@@ -24,5 +24,11 @@ export function createCRUDRoutes<T extends Document>(model: Model<T>, imageProp:
     // DELETE
     router.delete('/:id', controller.deleteBase);
 
+
+    // PUT FOR IMG ONLY
+    if(imageProp){
+        router.put("update-img/:id", uploadImage(imageProp), controller.putBaseForImg)
+    }
+
     return router;
 }
