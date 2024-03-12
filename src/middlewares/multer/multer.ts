@@ -51,7 +51,6 @@ export const uploadMultipleImages = (imageProp: string) => {
             });
             urls.push(result.url);
           }
-          console.log(urls);
 
           // El body.body se deja solo para prueba con postman
           if (req.body && typeof req.body.body === "string") {

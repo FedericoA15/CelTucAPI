@@ -22,6 +22,7 @@ import {
 import routerLogin from "./login";
 import routerUser from "./user";
 import routerLogout from "./logout";
+import routerProduct from "./products";
 
 const router = Router();
 
@@ -36,7 +37,7 @@ router.use("/groceryTwoCarouselItem", createCRUDRoutes(GroceryTwoCarouselItemMod
 router.use("/healthCarouselItem", createCRUDRoutes(HealthCarouselItemModel));
 router.use("/mainCarouselItem", createCRUDRoutes(MainCarouselItemModel));
 router.use("/order", createCRUDRoutes(OrderModel));
-router.use("/product", createCRUDRoutes(ProductModel));
+router.use("/product", routerProduct);
 router.use("/review", createCRUDRoutes(ReviewModel));
 router.use("/service", createCRUDRoutes(ServiceModel));
 router.use("/shop", createCRUDRoutes(ShopModel));

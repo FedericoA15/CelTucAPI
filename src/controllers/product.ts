@@ -9,6 +9,8 @@ export const createProduct = async (req: Request, res: Response) => {
         const body = req.body;
         const accessToken = 'TU_ACCESS_TOKEN';
 
+        body["images"] = (req as any)["images"];
+
         const response = await axios.post(
             `${API_URL}${STORE_ID}products`,
             { body },
