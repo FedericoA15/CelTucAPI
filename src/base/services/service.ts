@@ -6,9 +6,9 @@ export class CRUDService<T extends Document> {
     constructor(model: Model<T>) {
         this.model = model;
     }
-
-    getAll = async (filter = {}) => {
-        return await this.model.find(filter);
+    
+    getAll = async (filter: any, skip: number, limit: number) => {
+        return await this.model.find(filter).skip(skip).limit(limit);
     };
     
     getById = async (filter = {}) => {
